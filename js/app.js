@@ -16,7 +16,7 @@ if( localStorage.getItem('products') != null)
 // Add function Validation 
 function addProduct()
 {
-    if(validateProduct()== true)
+    if(valdiateProdcutName()== true)
     {
         // object
         var product= {
@@ -33,7 +33,7 @@ function addProduct()
     else {
         document.getElementById('messageValidation').innerHTML = 'Invalid product Name...';
         clearProduct();
-}
+    }
 }  
 // Clear Product Function 
 function clearProduct()
@@ -45,26 +45,28 @@ function clearProduct()
 }
 
 // display Products function 
-function displayProducts()
+function displayProducts() 
 {
-
+    
+    
     var cointProduct = ``;
     for( var i=0 ; i< productsContainer.length ; i++)
     {
         cointProduct+= `
         <tr >
-            <td>${productsContainer[i].name}</td>
-            <td>${productsContainer[i].price}</td>
-            <td>${productsContainer[i].category}</td>
-            <td>${productsContainer[i].des}</td>
+        <td>${productsContainer[i].name}</td>
+        <td>${productsContainer[i].price}</td>
+        <td>${productsContainer[i].category}</td>
+        <td>${productsContainer[i].des}</td>
             <td><button onclick='deleteProduct(${i})' class ='btn btn-outline-danger btn-sm '>Delete</button></td>
             <td><button onclick='setForm(${i})'   class ='btn btn-outline-warning btn-sm '>Update</button></td>
-        </tr>
-        `
+            </tr>
+            `
+        }
+        document.getElementById('tablebody').innerHTML =cointProduct;
+        document.getElementById('messageValidation').innerHTML = '';
     }
-    document.getElementById('tablebody').innerHTML =cointProduct;
-   }
-   
+    
 //Delete Product Function
 function deleteProduct(productIndex)
 {
@@ -109,6 +111,7 @@ function setForm(id)
 }
 // update value After Sat function
 function updateProdect(){
+   if( valdiateProdcutName() == true){
     productsContainer[updateIndex].name = document.getElementById ('productNameInput').value;
     productsContainer[updateIndex].price =document.getElementById ('productPriceInput').value;
     productsContainer[updateIndex].category =document.getElementById ('productCategoryInput').value;
@@ -118,6 +121,11 @@ function updateProdect(){
     clearProduct();
     updateBtn.classList.add('d-none');
     addBtn.classList.replace('d-none' , 'd-block')
+   }
+   else {
+    document.getElementById('messageValidation').innerHTML = 'Invalid product Name...';
+
+   }
 }
 // Reqular Expression Function 
 function valdiateProdcutName(){
